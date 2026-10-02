@@ -51,3 +51,5 @@ __screenshots__/
 .data
 .nitro
 .cache
+
+.vercel

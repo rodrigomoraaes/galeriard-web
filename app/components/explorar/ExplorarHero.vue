@@ -20,8 +20,9 @@ const titleWords = ['Boas', 'interfaces,', 'reunidas', 'num', 'só', 'lugar']
           <Badge variant="highlight">Novo</Badge>
           <span class="whitespace-nowrap">
             <span class="font-medium">Filtre por cor, estilo e segmento</span>
-            <span class="text-primary/20"> · </span>
-            <span class="transition-colors group-hover/pill:text-primary/80">Ver agora</span>
+            <!-- No celular o "Ver agora" sai para a pílula caber na tela -->
+            <span class="hidden text-primary/20 sm:inline"> · </span>
+            <span class="hidden transition-colors sm:inline group-hover/pill:text-primary/80">Ver agora</span>
           </span>
           <span
             class="flex size-6 items-center justify-center rounded-full bg-primary/[0.04] transition-colors group-hover/pill:bg-primary/[0.08]"
@@ -44,7 +45,10 @@ const titleWords = ['Boas', 'interfaces,', 'reunidas', 'num', 'só', 'lugar']
         Landing pages e interfaces de produtos reais, organizadas por segmento e estilo: SaaS, P&B, animado e mais.
       </p>
 
-      <div class="mt-9 flex animate-fade-up flex-wrap justify-center gap-3 [animation-delay:500ms]">
+      <!-- No celular os botões empilham com a mesma largura; do sm em diante ficam lado a lado -->
+      <div
+        class="mx-auto mt-9 grid w-full max-w-xs animate-fade-up gap-3 [animation-delay:500ms] sm:flex sm:max-w-none sm:justify-center"
+      >
         <Button as="a" href="#explorar" size="lg">
           Explorar referências
           <ArrowDown data-icon="inline-end" />

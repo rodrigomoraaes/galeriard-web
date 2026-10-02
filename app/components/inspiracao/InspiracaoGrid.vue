@@ -7,7 +7,7 @@ defineProps<{ inspiracoes: Inspiracao[] }>()
 </script>
 
 <template>
-  <ul v-if="inspiracoes.length" class="grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+  <ul v-if="inspiracoes.length" class="grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
     <li v-for="item in inspiracoes" :key="item.id">
       <InspiracaoCard :inspiracao="item" />
     </li>

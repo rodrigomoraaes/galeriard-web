@@ -4,7 +4,7 @@ import SiteHeader from '@/components/layout/SiteHeader.vue'
 </script>
 
 <template>
-  <div class="flex min-h-dvh flex-col">
+  <div class="flex min-h-dvh flex-col overflow-x-clip">
     <SiteHeader />
     <div class="flex-1">
       <slot />
