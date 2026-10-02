@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap');
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn-vue/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Paleta de marca — mesmos valores do design system do x.ai.
+ * Use os nomes semânticos (primary, soft, highlight…) nos componentes;
+ * os nomes de marca (jet, dove, sunset…) ficam para casos pontuais.
+ */
+@theme {
+    --color-jet: hsl(0 0% 4%);
+    --color-charcoal: hsl(0 0% 10%);
+    --color-umbra: hsl(221 12% 14%);
+    --color-ink: hsl(213 11% 16%);
+    --color-ash: hsl(216 5% 19%);
+    --color-steel: hsl(216 4% 22%);
+    --color-fog: hsl(216 4% 51%);
+    --color-pewter: hsl(213 12% 70%);
+    --color-dove: hsl(222 19% 86%);
+    --color-nimbus: hsl(228 22% 95.5%);
+    --color-ivory: hsl(40 18% 97%);
+    --color-midnight: hsl(214 58% 9.4%);
+    --color-breeze: hsl(214 49% 74%);
+    --color-dawn: hsl(37 100% 76%);
+    --color-sunset: hsl(22 100% 51.6%);
+    --color-dusk: hsl(263 70% 50.4%);
+    --color-twilight: hsl(255 92% 76%);
+
+    --text-display: 3.75rem;
+    --text-display--line-height: 1.1;
+    --text-display--letter-spacing: -0.025em;
+
+    --container-page: 80rem;
+    --spacing-header: 4rem;
+}
+
+@theme inline {
+    --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+    --font-heading: var(--font-sans);
+    --font-mono: 'Geist Mono', ui-monospace, monospace;
+    --color-soft: var(--soft);
+    --color-soft-hover: var(--soft-hover);
+    --color-highlight: var(--highlight);
+    --color-highlight-foreground: var(--highlight-foreground);
+    --color-success: var(--success);
+    --color-warning: var(--warning);
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+    /* Superfícies */
+    --background: #fff;
+    --foreground: var(--color-jet);
+    --card: var(--color-ivory);
+    --card-foreground: var(--color-jet);
+    --popover: #fff;
+    --popover-foreground: var(--color-jet);
+
+    /* Ações */
+    --primary: var(--color-jet);
+    --primary-foreground: #fff;
+    --secondary: var(--color-nimbus);
+    --secondary-foreground: var(--color-jet);
+    --muted: var(--color-nimbus);
+    --muted-foreground: var(--color-fog);
+    --accent: var(--color-nimbus);
+    --accent-foreground: var(--color-jet);
+
+    /* Botão "soft": um toque de primary sobre o card (padrão x.ai) */
+    --soft: color-mix(in srgb, var(--primary) 3%, var(--card));
+    --soft-hover: color-mix(in srgb, var(--primary) 7%, var(--card));
+
+    /* Destaque de marca */
+    --highlight: var(--color-sunset);
+    --highlight-foreground: #fff;
+
+    /* Estados */
+    --destructive: hsl(0 84% 60%);
+    --success: hsl(142 71% 45%);
+    --warning: hsl(45 93% 47%);
+
+    /* Linhas */
+    --border: var(--color-dove);
+    --input: var(--color-dove);
+    --ring: color-mix(in srgb, var(--primary) 30%, transparent);
+
+    --chart-1: var(--color-sunset);
+    --chart-2: var(--color-dusk);
+    --chart-3: var(--color-breeze);
+    --chart-4: var(--color-dawn);
+    --chart-5: var(--color-fog);
+
+    --radius: 0.5rem;
+
+    --sidebar: var(--color-ivory);
+    --sidebar-foreground: var(--color-jet);
+    --sidebar-primary: var(--color-jet);
+    --sidebar-primary-foreground: #fff;
+    --sidebar-accent: var(--color-nimbus);
+    --sidebar-accent-foreground: var(--color-jet);
+    --sidebar-border: var(--color-dove);
+    --sidebar-ring: var(--ring);
+}
+
+.dark {
+    --background: var(--color-jet);
+    --foreground: #fff;
+    --card: var(--color-charcoal);
+    --card-foreground: #fff;
+    --popover: var(--color-charcoal);
+    --popover-foreground: #fff;
+
+    --primary: #fff;
+    --primary-foreground: var(--color-jet);
+    --secondary: var(--color-umbra);
+    --secondary-foreground: #fff;
+    --muted: var(--color-charcoal);
+    --muted-foreground: var(--color-fog);
+    --accent: var(--color-umbra);
+    --accent-foreground: #fff;
+
+    --destructive: hsl(0 72% 65%);
+    --success: hsl(142 69% 58%);
+    --warning: hsl(45 93% 58%);
+
+    --border: var(--color-umbra);
+    --input: var(--color-steel);
+
+    --sidebar: var(--color-charcoal);
+    --sidebar-foreground: #fff;
+    --sidebar-primary: #fff;
+    --sidebar-primary-foreground: var(--color-jet);
+    --sidebar-accent: var(--color-umbra);
+    --sidebar-accent-foreground: #fff;
+    --sidebar-border: var(--color-umbra);
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    html {
+        color-scheme: light;
+    }
+    html.dark {
+        color-scheme: dark;
+    }
+    body {
+        @apply bg-background text-foreground font-sans antialiased;
+    }
+    ::selection {
+        @apply bg-highlight/20;
+    }
+}
+
+/* Entrada do hero: palavras sobem com leve rotação 3D, como no x.ai */
+@keyframes rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(45%) rotateX(-40deg);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@utility animate-rise-in {
+    animation: rise-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility animate-fade-up {
+    animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-rise-in,
+    .animate-fade-up {
+        animation: none;
+    }
+}

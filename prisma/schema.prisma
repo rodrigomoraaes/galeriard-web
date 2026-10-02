@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../server/database/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum CategoriaGrupo {
+  segmento // o que o produto faz
+  estilo // como a interface se parece
+}
+
+model Categoria {
+  id           String         @id @default(cuid())
+  slug         String         @unique
+  nome         String
+  /// Nome por extenso quando `nome` é abreviado (ex.: P&B).
+  nomeCompleto String?        @map("nome_completo")
+  grupo        CategoriaGrupo
+  /// Posição no filtro, dentro do grupo.
+  ordem        Int            @default(0)
+  inspiracoes  Inspiracao[]
+
+  @@map("categorias")
+}
+
+model Cor {
+  id          String          @id @default(cuid())
+  slug        String          @unique
+  nome        String
+  /// Amostra usada na interface. Não é a cor exata de nenhum site.
+  amostra     String
+  /// Posição no filtro: neutros primeiro, depois o círculo cromático.
+  ordem       Int             @default(0)
+  inspiracoes InspiracaoCor[]
+
+  @@map("cores")
+}
+
+model Inspiracao {
+  id           String          @id @default(cuid())
+  slug         String          @unique
+  nome         String
+  descricao    String
+  url          String
+  imagem       String
+  logoSrc      String?         @map("logo_src")
+  logoIniciais String          @map("logo_iniciais")
+  /// Conteúdo exclusivo: o card mostra o cadeado.
+  bloqueado    Boolean         @default(false)
+  categorias   Categoria[]
+  cores        InspiracaoCor[]
+  criadoEm     DateTime        @default(now()) @map("criado_em")
+  atualizadoEm DateTime        @updatedAt @map("atualizado_em")
+
+  @@map("inspiracoes")
+}
+
+/// Tabela explícita porque a ordem importa: da cor mais presente para a menos.
+model InspiracaoCor {
+  inspiracaoId String     @map("inspiracao_id")
+  corId        String     @map("cor_id")
+  ordem        Int
+  inspiracao   Inspiracao @relation(fields: [inspiracaoId], references: [id], onDelete: Cascade)
+  cor          Cor        @relation(fields: [corId], references: [id], onDelete: Cascade)
+
+  @@id([inspiracaoId, corId])
+  @@index([corId])
+  @@map("inspiracoes_cores")
+}
