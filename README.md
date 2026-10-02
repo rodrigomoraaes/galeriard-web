@@ -104,4 +104,4 @@ Todos os direitos reservados. O código está público para visualização e por
 
 ---
 
-Criado por Rodrigo Moraes · [rodrigoprojetos.com](https://rodrigoprojetos.com)
+Criado por Rodrigo Moraes · [rodrigoprojetos.com](https://rodrigoprojetos-web.vercel.app)
